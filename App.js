@@ -1,20 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import "react-native-gesture-handler";
+import React, { useEffect, useState } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import Drawer from "./components/Drawer/Drawer";
 
 export default function App() {
+  const [token, setToken] = useState(null);
+  useEffect(() => {
+    async function checkAuth() {
+      const x = await AsyncStorage.getItem("user");
+      setToken(x);
+    }
+    checkAuth();
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Drawer />
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

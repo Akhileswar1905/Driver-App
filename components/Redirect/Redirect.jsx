@@ -21,7 +21,7 @@ const Redirect = ({ navigation }) => {
       </Text>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate("Home");
+          navigation.jumpTo("Home");
         }}
       >
         <Text
